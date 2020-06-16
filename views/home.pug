@@ -9,14 +9,14 @@ block content
       .col-sm-6
         h2 New Analysis
         form.form-horizontal(method='POST', action='/analyses')
-        .form-group.row
-          label.col-med-3.col-form-label.text-right.font-weight-bold(for='sra') SRA Run ID
-          .col-med-7
-            input.form-control(type='text', name='sra', id='sra', autofocus=true)
-        .form-group.row.justify-content-md-center
-          .offset-sm-3.col-sm-8
-            button.btn.btn-primary(type='submit')
-              | Submit
+          .form-group.row
+            label.col-med-3.col-form-label.text-right.font-weight-bold(for='sra') SRA Run ID
+            .col-med-7
+              input.form-control(type='text', name='sra', id='sra', autofocus=true)
+          .form-group.row.justify-content-md-center
+            .offset-sm-3.col-sm-8
+              button.btn.btn-primary(type='submit')
+                | Submit
       .col-sm-6
         p Here are some example values to try:
         ul
