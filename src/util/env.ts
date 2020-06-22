@@ -14,9 +14,21 @@ const prod = ENVIRONMENT === "production"; // Anything else is treated as 'dev'
 
 export const SESSION_SECRET = process.env["SESSION_SECRET"];
 export const MONGODB_URI = prod ? process.env["MONGODB_URI"] : process.env["MONGODB_URI_LOCAL"];
+export const SRA_DOWNLOAD_ENDPOINT = process.env["SRA_DOWNLOAD_ENDPOINT"];
+export const FASTQ_ANALYSIS_ENDPOINT = process.env["FASTQ_ANALYSIS_ENDPOINT"];
 
 if (!SESSION_SECRET) {
     logger.error("No client secret. Set SESSION_SECRET environment variable.");
+    process.exit(1);
+}
+
+if (!SRA_DOWNLOAD_ENDPOINT) {
+    logger.error("No SRA download service endpoint defined. Set SRA_DOWNLOAD_ENDPOINT environment variable.");
+    process.exit(1);
+}
+
+if (!FASTQ_ANALYSIS_ENDPOINT) {
+    logger.error("No fastq analysis service endpoint defined. Set FASTQ_ANALYSIS_ENDPOINT environment variable.");
     process.exit(1);
 }
 

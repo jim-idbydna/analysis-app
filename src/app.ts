@@ -9,14 +9,15 @@ import path from "path";
 import mongoose from "mongoose";
 import passport from "passport";
 import bluebird from "bluebird";
-import { MONGODB_URI, SESSION_SECRET } from "./util/secrets";
+import { MONGODB_URI, SESSION_SECRET } from "./util/env";
 
 const MongoStore = mongo(session);
 
 // Controllers (route handlers)
 import * as homeController from "./controllers/home";
 import * as userController from "./controllers/user";
-import * as analysesControler from "./controllers/analyses";
+import * as analysisControler from "./controllers/analysis";
+import * as privateAnalysisControler from "./controllers/private/analysis";
 
 
 // API keys and Passport configuration
@@ -93,8 +94,9 @@ app.get("/reset/:token", userController.getReset);
 app.post("/reset/:token", userController.postReset);
 app.get("/signup", userController.getSignup);
 app.post("/signup", userController.postSignup);
-app.get("/analyses", passportConfig.isAuthenticated, analysesControler.getAnalyses);
-app.post("/analyses", passportConfig.isAuthenticated, analysesControler.postAnalysis);
+app.get("/analysis", passportConfig.isAuthenticated, analysisControler.getanalysis);
+app.post("/analysis", passportConfig.isAuthenticated, analysisControler.postAnalysis);
+app.post("/private/analysis", privateAnalysisControler.postAnalysis);
 app.get("/account", passportConfig.isAuthenticated, userController.getAccount);
 app.post("/account/profile", passportConfig.isAuthenticated, userController.postUpdateProfile);
 app.post("/account/password", passportConfig.isAuthenticated, userController.postUpdatePassword);

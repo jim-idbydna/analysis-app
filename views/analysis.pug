@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .page-header
+    h2 Analyses
+    hr
+
+  if analyses.length == 0
+    p No analyses
+  else
+    for analysis in analyses
+      h3 #{analysis.sraId}
+      p Started: #{analysis.startTime}
+      if analysis.status == "DONE"
+        p Completed:#{analysis.completeTime}
+        p Q20 rate: #{analysis.results.q20_rate * 100}%
+        p Q30 rate: #{analysis.results.q30_rate * 100}%
+        p Mean read length: #{analysis.results.read1_mean_length}
+        p GC content: #{analysis.results.gc_content}
+      else if analysis.status == "PENDING"
+        p Analysis in progress...
+      else
+        p.error Encountered an error.
+      hr
